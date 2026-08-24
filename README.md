@@ -1,4 +1,4 @@
-# ToolNet – Robot Simulation Platform
+# ToolNet “ Robot Simulation Platform
 
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.11+-blue.svg" alt="Python 3.11+" />
@@ -14,7 +14,7 @@ The project has been refactored around a streamlined, glass-morphism control das
 
 ## ?? Demo Videos
 
-Watch the videos below to see ToolNet in action � click the play button on each.
+Watch the videos below to see ToolNet in action – click the play button on each.
 
 ### 1. Recording a Goal
 <video width="100%" controls>
@@ -36,7 +36,7 @@ Watch the videos below to see ToolNet in action � click the play button on each.
 
 ## ?? Demo Videos
 
-Watch these short videos to see ToolNet in action � click the play button on each.
+Watch these short videos to see ToolNet in action – click the play button on each.
 
 ### 1. Recording a Goal
 <video width="100%" controls>
@@ -167,22 +167,22 @@ For headless/CI environments, prefer the no-GUI configuration and verify that ca
 
 ```text
 .
-├── app.py                  # Main Flask application entry point
-├── README.md               # Project overview and usage docs
-├── LICENSE                 # BSD-2-Clause license
-├── requirements.txt        # Python dependencies
-├── dataset/                # Training and evaluation data folders
-├── jsons/                  # Scene, action, predicate, and goal definitions
-├── models/                 # Meshes, URDFs, and simulation assets
-├── src/                    # Core simulation, parser, utilities, and model logic
-├── static/                 # Front-end assets and dashboard resources
-├── templates/              # Web templates and UI views
-├── logs/                   # Runtime logs and outputs
-├── train.py                # Training pipeline entry point
-├── validate_toolnet.py     # Validation and sanity-check tooling
-├── generate_synthetic_dataset.py
-├── fix_*.py                # Utility patches and compatibility fixes
-└── ...
+â”œâ”€â”€ app.py                  # Main Flask application entry point
+â”œâ”€â”€ README.md               # Project overview and usage docs
+â”œâ”€â”€ LICENSE                 # BSD-2-Clause license
+â”œâ”€â”€ requirements.txt        # Python dependencies
+â”œâ”€â”€ dataset/                # Training and evaluation data folders
+â”œâ”€â”€ jsons/                  # Scene, action, predicate, and goal definitions
+â”œâ”€â”€ models/                 # Meshes, URDFs, and simulation assets
+â”œâ”€â”€ src/                    # Core simulation, parser, utilities, and model logic
+â”œâ”€â”€ static/                 # Front-end assets and dashboard resources
+â”œâ”€â”€ templates/              # Web templates and UI views
+â”œâ”€â”€ logs/                   # Runtime logs and outputs
+â”œâ”€â”€ train.py                # Training pipeline entry point
+â”œâ”€â”€ validate_toolnet.py     # Validation and sanity-check tooling
+â”œâ”€â”€ generate_synthetic_dataset.py
+â”œâ”€â”€ fix_*.py                # Utility patches and compatibility fixes
+â””â”€â”€ ...
 ```
 
 ## License
@@ -214,6 +214,6 @@ For questions, contributions, or deployment support, please open an issue or con
 
 Watch these short videos to see ToolNet in action:
 
-- [Recording a Goal](demo/demo1.mp4) � Record a sequence of actions and save it as a reusable goal.
-- [Playing Back a Goal](demo/demo2.mp4) � Execute a saved goal automatically.
-- [Dashboard Walkthrough](demo/demo3.mp4) � Explore the modern dark dashboard and its features.
+- [Recording a Goal](demo/demo1.mp4) – Record a sequence of actions and save it as a reusable goal.
+- [Playing Back a Goal](demo/demo2.mp4) – Execute a saved goal automatically.
+- [Dashboard Walkthrough](demo/demo3.mp4) – Explore the modern dark dashboard and its features.
