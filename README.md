@@ -14,6 +14,28 @@ The project has been refactored around a streamlined, glass-morphism control das
 
 ## ?? Demo Videos
 
+Watch the videos below to see ToolNet in action – click the play button on each.
+
+### 1. Recording a Goal
+<video width="100%" controls>
+  <source src="demo/demo1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+### 2. Playing Back a Goal
+<video width="100%" controls>
+  <source src="demo/demo2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+### 3. Dashboard Walkthrough
+<video width="100%" controls>
+  <source src="demo/demo3.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+## ?? Demo Videos
+
 Watch these short videos to see ToolNet in action – click the play button on each.
 
 ### 1. Recording a Goal
