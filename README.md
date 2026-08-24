@@ -11,6 +11,29 @@ ToolNet is a modern web-based robot simulation platform for task planning, actio
 
 The project has been refactored around a streamlined, glass-morphism control dashboard with real-time monitoring, action composition, and reusable mission playback workflows. It supports both headless and graphical rendering modes, making it easier to run in local development environments, remote labs, or GPU-accelerated workstations.
 
+
+## ?? Demo Videos
+
+Watch these short videos to see ToolNet in action – click the play button on each.
+
+### 1. Recording a Goal
+<video width="100%" controls>
+  <source src="demo/demo1.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+### 2. Playing Back a Goal
+<video width="100%" controls>
+  <source src="demo/demo2.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+### 3. Dashboard Walkthrough
+<video width="100%" controls>
+  <source src="demo/demo3.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
 ## Quick Start
 
 ```bash
