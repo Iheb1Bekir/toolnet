@@ -1,219 +1,368 @@
-# ToolNet “ Robot Simulation Platform
+````markdown
+# ToolNet – Robot Simulation Platform
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.11+-blue.svg" alt="Python 3.11+" />
-  <img src="https://img.shields.io/badge/Flask-3.x-000000.svg" alt="Flask" />
-  <img src="https://img.shields.io/badge/PyBullet-Enabled-3B82F6.svg" alt="PyBullet" />
-  <img src="https://img.shields.io/badge/License-BSD--2--Clause-orange.svg" alt="BSD-2-Clause" />
-</p>
+[![Python](https://img.shields.io/badge/python-3.11-blue.svg)](https://python.org)
+[![License](https://img.shields.io/badge/license-BSD--2--Clause-green.svg)](LICENSE)
+[![Flask](https://img.shields.io/badge/flask-3.1.0-lightgrey.svg)](https://flask.palletsprojects.com)
+[![PyBullet](https://img.shields.io/badge/pybullet-3.2.7-orange.svg)](https://pybullet.org)
 
-ToolNet is a modern web-based robot simulation platform for task planning, action execution, and goal-driven automation in a PyBullet environment. The dashboard is the primary interface for interacting with a simulated Husky mobile robot equipped with a UR5 arm and gripper, enabling users to orchestrate robot actions, stream live camera data, record task sequences, and replay goal-driven behaviors.
+**ToolNet** is a modern web-based robot simulation platform that combines Flask, PyBullet, and a sleek glass-morphism dashboard. It allows users to command a simulated Husky robot equipped with a UR5 robotic arm and Robotiq gripper, record action sequences, and replay them as reusable goals.
 
-The project has been refactored around a streamlined, glass-morphism control dashboard with real-time monitoring, action composition, and reusable mission playback workflows. It supports both headless and graphical rendering modes, making it easier to run in local development environments, remote labs, or GPU-accelerated workstations.
+---
 
+## ✨ Key Features
 
-## ?? Demo Videos
+- 🎮 **Interactive Robot Control** – Control a simulated robot directly from a web interface.
+- 📷 **Live Camera Feed** – Low-latency MJPEG stream (640×480 @ 8 FPS) with a third-person follow camera.
+- 🖥️ **External 3D View** – Optional PyBullet GUI window for full 3D visualization.
+- 🎯 **Action Composer** – Build custom actions (`moveTo`, `pick`, `place`, etc.) using dynamic argument dropdowns.
+- 🧠 **Goal Recording & Playback** – Record action sequences and save them as reusable goals.
+- ↩️ **Undo / Rollback System** – Automatic state snapshots with rollback on failure.
+- 🎨 **Modern Dashboard** – Responsive dark glass-morphism interface with real-time logs and status updates.
+- ⚡ **Performance Optimized** – 120 Hz physics stepping, bounded camera FPS, and GPU acceleration support.
+- 📝 **Persistent User Goals** – Saved goals remain available after restarting the application.
 
-Watch the videos below to see ToolNet in action – click the play button on each.
+---
 
-### 1. Recording a Goal
-<video width="100%" controls>
-  <source src="demo/demo1.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+## 🎬 Demo Videos
 
-### 2. Playing Back a Goal
-<video width="100%" controls>
-  <source src="demo/demo2.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+- 📹 **Recording a Goal** – Demonstrates recording and saving custom goals.
+- 📹 **Dashboard Walkthrough** – Overview of the dashboard, controls, and workflow.
 
-### 3. Dashboard Walkthrough
-<video width="100%" controls>
-  <source src="demo/demo3.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+---
 
-## ?? Demo Videos
+## 📦 System Requirements
 
-Watch these short videos to see ToolNet in action – click the play button on each.
+### Software
 
-### 1. Recording a Goal
-<video width="100%" controls>
-  <source src="demo/demo1.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+- Python **3.11+**
+- Pip (latest version)
+- Virtual Environment (recommended)
 
-### 2. Playing Back a Goal
-<video width="100%" controls>
-  <source src="demo/demo2.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+### Supported Operating Systems
 
-### 3. Dashboard Walkthrough
-<video width="100%" controls>
-  <source src="demo/demo3.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+- Windows 10 / 11
+- Linux
+- macOS
 
-## Quick Start
+### Recommended Hardware
 
-```bash
-python app.py
-```
+| Component | Minimum | Recommended |
+|------------|----------|-------------|
+| CPU | 2 Cores | 4+ Cores |
+| RAM | 4 GB | 8+ GB |
+| GPU | Integrated Graphics | NVIDIA RTX or equivalent |
 
-Then open:
+---
 
-```text
-http://127.0.0.1:5000
-```
+## 🚀 Installation
 
-The dashboard is now the primary user experience, and the legacy tutorial pages have been removed in favor of a cleaner mission-control workflow.
-
-## Key Features
-
-- Headless or GUI PyBullet simulation support
-- Embedded live MJPEG camera feed for robot monitoring
-- Action Composer with dynamic argument selection and execution
-- Goal recording and playback for saved action chains
-- Undo and rollback support for failed or partial actions
-- Modern dark dashboard with glass-morphism styling
-- RTX GPU acceleration support for improved rendering performance
-- Reusable, editable goal definitions for task automation workflows
-
-## System Requirements
-
-- Python 3.11 or newer
-- PyBullet
-- Flask
-- NumPy
-- OpenCV / image streaming support
-- A compatible graphics driver for GUI rendering (optional if running headless)
-- Optional: NVIDIA RTX-enabled environment for accelerated simulation performance
-
-## Installation
-
-1. Clone the repository:
+### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-org/toolnet.git
+git clone https://github.com/Iheb1Bekir/toolnet.git
 cd toolnet
 ```
 
-2. Create and activate a virtual environment:
+### 2. Create a Virtual Environment
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
+python -m venv .venv-launch
 ```
 
-On Windows PowerShell:
+### 3. Activate the Virtual Environment
+
+#### Windows
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+.\.venv-launch\Scripts\Activate.ps1
 ```
 
-3. Install dependencies:
+#### Linux / macOS
+
+```bash
+source .venv-launch/bin/activate
+```
+
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
-
-Launch the platform:
+### 5. Start ToolNet
 
 ```bash
 python app.py
 ```
 
-Then visit:
+### 6. Open the Dashboard
+
+Navigate to:
 
 ```text
 http://127.0.0.1:5000
 ```
 
-### Typical workflow
+---
 
-- Select a goal or mission configuration from the available options.
-- Use the action composer to define and execute robot commands.
-- Monitor the current scene and camera feed from the control dashboard.
-- Record a sequence of actions as a reusable goal.
-- Replay saved actions step-by-step or run the full goal automatically.
-- If an action fails, use the rollback/undo flow to recover or adjust the sequence.
+## 🎮 Usage Guide
 
-## Configuration
+### Selecting a World and Goal
 
-The application is designed to run in both desktop and headless environments.
+1. Select a world from the **World** dropdown.
+2. Select a saved goal from the **Goal** dropdown.
+3. Built-in goals remain hidden from the user interface.
+4. To create a new goal, follow the recording procedure below.
 
-Common setup considerations:
+---
 
-- Use GUI mode when a local display is available.
-- Use headless mode when running in a server or remote environment without an attached monitor.
-- Ensure the PYTHONPATH and virtual environment are correctly activated before launching the app.
-- If using GPU-accelerated rendering, verify that PyBullet and the installed graphics stack are compatible with your hardware.
+### Recording and Saving a Goal
 
-Example environment hints:
+1. Press the **Record** button (🔴).
+2. Create actions using the **Action Composer**.
+3. Execute actions one by one.
+4. Press **Record** again to stop recording.
+5. Click **+ New Goal**.
+6. Enter a goal name.
+7. Click **Save Goal**.
 
-```bash
-export DISPLAY=:0
-python app.py
-```
+Your goal is immediately stored and remains available after application restarts.
 
-For headless/CI environments, prefer the no-GUI configuration and verify that camera streaming and simulation threads initialize correctly.
+---
 
-## Project Structure
+### Playing Back a Goal
+
+1. Select a goal.
+2. Press **Start**.
+3. Use:
+   - **Next** to execute actions step-by-step.
+   - **Run All** to execute the entire goal automatically.
+
+---
+
+### Keyboard Shortcuts
+
+| Key | Function |
+|------|----------|
+| N | Next Action |
+| R | Reset Simulation |
+| U | Undo Last Action |
+| Space | Start / Run All |
+
+---
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+| Variable | Description | Default |
+|-----------|-------------|----------|
+| `PYBULLET_USE_SOFTWARE` | Force software rendering | `0` |
+| `PYBULLET_USE_OPENGL` | OpenGL rendering mode | unset |
+| `TOOLNET_RENDERER` | Camera renderer (`hardware` or `tiny`) | `hardware` |
+
+---
+
+### Command-Line Arguments
+
+| Argument | Description |
+|-----------|-------------|
+| `--world` | Load a specific world JSON |
+| `--goal` | Load a built-in goal JSON |
+| `--randomize` | Randomize world and goal |
+| `--headless` | Run without PyBullet GUI |
+| `--display` | Display mode (`none`, `camera`, `both`) |
+
+---
+
+## 📂 Project Structure
 
 ```text
-.
-â”œâ”€â”€ app.py                  # Main Flask application entry point
-â”œâ”€â”€ README.md               # Project overview and usage docs
-â”œâ”€â”€ LICENSE                 # BSD-2-Clause license
-â”œâ”€â”€ requirements.txt        # Python dependencies
-â”œâ”€â”€ dataset/                # Training and evaluation data folders
-â”œâ”€â”€ jsons/                  # Scene, action, predicate, and goal definitions
-â”œâ”€â”€ models/                 # Meshes, URDFs, and simulation assets
-â”œâ”€â”€ src/                    # Core simulation, parser, utilities, and model logic
-â”œâ”€â”€ static/                 # Front-end assets and dashboard resources
-â”œâ”€â”€ templates/              # Web templates and UI views
-â”œâ”€â”€ logs/                   # Runtime logs and outputs
-â”œâ”€â”€ train.py                # Training pipeline entry point
-â”œâ”€â”€ validate_toolnet.py     # Validation and sanity-check tooling
-â”œâ”€â”€ generate_synthetic_dataset.py
-â”œâ”€â”€ fix_*.py                # Utility patches and compatibility fixes
-â””â”€â”€ ...
+toolnet/
+├── app.py
+├── camera_service.py
+├── rollback_manager.py
+├── goal_manager.py
+├── action_validator.py
+├── command_bus.py
+├── husky_ur5.py
+├── src/
+├── jsons/
+│   ├── goals/
+│   └── user_goals/
+├── templates/
+│   └── index.html
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── app.js
+├── logs/
+├── demo/
+│   ├── demo1.mp4
+│   └── demo3.mp4
+├── requirements.txt
+├── LICENSE
+└── README.md
 ```
 
-## License
+---
 
-This project is licensed under the BSD-2-Clause License.
+## 🧪 Troubleshooting
 
-Copyright (c) 2026, iHEB BEKIR
-All rights reserved.
+### PyBullet GUI Appears Blank
 
-See the [LICENSE](LICENSE) file for the full terms.
+- Zoom out using the mouse wheel.
+- Rotate the view using right-click + drag.
+- Enable software rendering:
 
-## Acknowledgments
+```powershell
+$env:PYBULLET_USE_SOFTWARE="1"
+```
 
-This project builds on earlier work and original research from the following contributors and teams:
+- Set Python to **High Performance GPU** mode in Windows Graphics Settings.
+
+---
+
+### Camera Feed Is Slow
+
+Reduce camera load by:
+
+- Increasing sleep time in `camera_service.py`
+- Lowering resolution to `320×240`
+- Disabling shadows:
+
+```python
+p.configureDebugVisualizer(
+    p.COV_ENABLE_SHADOWS,
+    0
+)
+```
+
+---
+
+### Goals Are Not Saving
+
+Verify:
+
+- The folder `jsons/user_goals/` exists.
+- The application has write permissions.
+- No antivirus is blocking file creation.
+
+---
+
+## 🏗️ Architecture Overview
+
+ToolNet combines several independent services:
+
+### Backend
+
+- Flask Web Server
+- Command Bus
+- Goal Manager
+- Rollback Manager
+- Action Validator
+- Camera Service
+
+### Simulation Layer
+
+- PyBullet Physics Engine
+- Husky Mobile Robot
+- UR5 Manipulator
+- Robotiq Gripper
+
+### Frontend
+
+- HTML5 Dashboard
+- Vanilla JavaScript
+- Real-Time Status Updates
+- Glass-Morphism UI
+
+---
+
+## 📄 License
+
+This project is licensed under the **BSD-2-Clause License**.
+
+See the LICENSE file for full details.
+
+Copyright © 2026 **Iheb Bekir**
+
+---
+
+## 🙏 Acknowledgments
+
+ToolNet is derived from the original ToolNet research project:
 
 - Rajas Bansal
 - Shreshth Tuli
 - Rohan Paul
 - Mausam
 
-Their foundational work on robot planning, tool use prediction, and simulator-based task execution established the basis for the current platform. The modern dashboard and workflow tooling extend that original research into a more accessible interactive simulation environment.
+Original Repository:
 
-## Contact
+https://github.com/reail-iitd/commonsense-task-planning
 
-For questions, contributions, or deployment support, please open an issue or contact the project maintainer.
+This version has been extensively redesigned and enhanced with:
 
+- Goal Recording System
+- Persistent User Goals
+- Live Camera Streaming
+- Modern Dashboard Interface
+- Rollback and Recovery System
+- Performance Optimizations
+- Improved User Experience
 
-## ?? Demo Videos
+---
 
-Watch these short videos to see ToolNet in action:
+## 🤝 Contributing
 
-- [Recording a Goal](demo/demo1.mp4) – Record a sequence of actions and save it as a reusable goal.
-- [Playing Back a Goal](demo/demo2.mp4) – Execute a saved goal automatically.
-- [Dashboard Walkthrough](demo/demo3.mp4) – Explore the modern dark dashboard and its features.
+Contributions are welcome.
+
+1. Fork the repository.
+2. Create a feature branch:
+
+```bash
+git checkout -b feature/amazing-feature
+```
+
+3. Commit your changes:
+
+```bash
+git commit -m "Add amazing feature"
+```
+
+4. Push your branch:
+
+```bash
+git push origin feature/amazing-feature
+```
+
+5. Open a Pull Request.
+
+---
+
+## 📞 Contact
+
+**Maintainer:** Iheb Bekir
+
+GitHub:
+
+https://github.com/Iheb1Bekir
+
+---
+
+## ⭐ Support the Project
+
+If you find ToolNet useful:
+
+- ⭐ Star the repository
+- 🐛 Report bugs
+- 💡 Suggest features
+- 🤝 Contribute improvements
+
+---
+
+**Enjoy controlling your robot! 🤖**
+````
