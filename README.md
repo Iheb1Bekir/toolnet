@@ -164,3 +164,11 @@ Their foundational work on robot planning, tool use prediction, and simulator-ba
 
 For questions, contributions, or deployment support, please open an issue or contact the project maintainer.
 
+
+## ?? Demo Videos
+
+Watch these short videos to see ToolNet in action:
+
+- [Recording a Goal](demo/demo1.mp4) – Record a sequence of actions and save it as a reusable goal.
+- [Playing Back a Goal](demo/demo2.mp4) – Execute a saved goal automatically.
+- [Dashboard Walkthrough](demo/demo3.mp4) – Explore the modern dark dashboard and its features.
