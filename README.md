@@ -1,0 +1,166 @@
+# ToolNet – Robot Simulation Platform
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.11+-blue.svg" alt="Python 3.11+" />
+  <img src="https://img.shields.io/badge/Flask-3.x-000000.svg" alt="Flask" />
+  <img src="https://img.shields.io/badge/PyBullet-Enabled-3B82F6.svg" alt="PyBullet" />
+  <img src="https://img.shields.io/badge/License-BSD--2--Clause-orange.svg" alt="BSD-2-Clause" />
+</p>
+
+ToolNet is a modern web-based robot simulation platform for task planning, action execution, and goal-driven automation in a PyBullet environment. The dashboard is the primary interface for interacting with a simulated Husky mobile robot equipped with a UR5 arm and gripper, enabling users to orchestrate robot actions, stream live camera data, record task sequences, and replay goal-driven behaviors.
+
+The project has been refactored around a streamlined, glass-morphism control dashboard with real-time monitoring, action composition, and reusable mission playback workflows. It supports both headless and graphical rendering modes, making it easier to run in local development environments, remote labs, or GPU-accelerated workstations.
+
+## Quick Start
+
+```bash
+python app.py
+```
+
+Then open:
+
+```text
+http://127.0.0.1:5000
+```
+
+The dashboard is now the primary user experience, and the legacy tutorial pages have been removed in favor of a cleaner mission-control workflow.
+
+## Key Features
+
+- Headless or GUI PyBullet simulation support
+- Embedded live MJPEG camera feed for robot monitoring
+- Action Composer with dynamic argument selection and execution
+- Goal recording and playback for saved action chains
+- Undo and rollback support for failed or partial actions
+- Modern dark dashboard with glass-morphism styling
+- RTX GPU acceleration support for improved rendering performance
+- Reusable, editable goal definitions for task automation workflows
+
+## System Requirements
+
+- Python 3.11 or newer
+- PyBullet
+- Flask
+- NumPy
+- OpenCV / image streaming support
+- A compatible graphics driver for GUI rendering (optional if running headless)
+- Optional: NVIDIA RTX-enabled environment for accelerated simulation performance
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-org/toolnet.git
+cd toolnet
+```
+
+2. Create and activate a virtual environment:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+On Windows PowerShell:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Usage
+
+Launch the platform:
+
+```bash
+python app.py
+```
+
+Then visit:
+
+```text
+http://127.0.0.1:5000
+```
+
+### Typical workflow
+
+- Select a goal or mission configuration from the available options.
+- Use the action composer to define and execute robot commands.
+- Monitor the current scene and camera feed from the control dashboard.
+- Record a sequence of actions as a reusable goal.
+- Replay saved actions step-by-step or run the full goal automatically.
+- If an action fails, use the rollback/undo flow to recover or adjust the sequence.
+
+## Configuration
+
+The application is designed to run in both desktop and headless environments.
+
+Common setup considerations:
+
+- Use GUI mode when a local display is available.
+- Use headless mode when running in a server or remote environment without an attached monitor.
+- Ensure the PYTHONPATH and virtual environment are correctly activated before launching the app.
+- If using GPU-accelerated rendering, verify that PyBullet and the installed graphics stack are compatible with your hardware.
+
+Example environment hints:
+
+```bash
+export DISPLAY=:0
+python app.py
+```
+
+For headless/CI environments, prefer the no-GUI configuration and verify that camera streaming and simulation threads initialize correctly.
+
+## Project Structure
+
+```text
+.
+├── app.py                  # Main Flask application entry point
+├── README.md               # Project overview and usage docs
+├── LICENSE                 # BSD-2-Clause license
+├── requirements.txt        # Python dependencies
+├── dataset/                # Training and evaluation data folders
+├── jsons/                  # Scene, action, predicate, and goal definitions
+├── models/                 # Meshes, URDFs, and simulation assets
+├── src/                    # Core simulation, parser, utilities, and model logic
+├── static/                 # Front-end assets and dashboard resources
+├── templates/              # Web templates and UI views
+├── logs/                   # Runtime logs and outputs
+├── train.py                # Training pipeline entry point
+├── validate_toolnet.py     # Validation and sanity-check tooling
+├── generate_synthetic_dataset.py
+├── fix_*.py                # Utility patches and compatibility fixes
+└── ...
+```
+
+## License
+
+This project is licensed under the BSD-2-Clause License.
+
+Copyright (c) 2026, iHEB BEKIR
+All rights reserved.
+
+See the [LICENSE](LICENSE) file for the full terms.
+
+## Acknowledgments
+
+This project builds on earlier work and original research from the following contributors and teams:
+
+- Rajas Bansal
+- Shreshth Tuli
+- Rohan Paul
+- Mausam
+
+Their foundational work on robot planning, tool use prediction, and simulator-based task execution established the basis for the current platform. The modern dashboard and workflow tooling extend that original research into a more accessible interactive simulation environment.
+
+## Contact
+
+For questions, contributions, or deployment support, please open an issue or contact the project maintainer.
+

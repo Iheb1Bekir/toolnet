@@ -1,0 +1,23 @@
+﻿# Virtual environment
+.venv-launch/
+venv/
+env/
+
+# Logs
+logs/
+*.log
+
+# Python cache
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# Dataset (if any)
+dataset/
+
+# OS files
+.DS_Store
+Thumbs.db

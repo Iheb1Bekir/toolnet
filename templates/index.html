@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolNet | Robot Simulation</title>
+    <meta name="description" content="ToolNet robot simulation dashboard">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+</head>
+<body>
+    <div class="app-shell">
+        <header class="topbar">
+            <div class="brand-block" aria-label="ToolNet brand">
+                <div class="brand-mark">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="brand-copy">
+                    <div class="brand-name">ToolNet</div>
+                    <div class="brand-caption">Robot Simulation Console</div>
+                </div>
+            </div>
+
+            <div class="topbar-meta">
+                <div class="status-chip" aria-live="polite">
+                    <span id="status-dot" class="status-dot online"></span>
+                    <span id="header-status">Online</span>
+                </div>
+                <div class="meta-pill">
+                    <span class="meta-label">Goal</span>
+                    <strong id="header-goal">{{ selected_goal or 'Select goal' }}</strong>
+                </div>
+                <div class="meta-pill">
+                    <span class="meta-label">World</span>
+                    <strong id="header-world">{{ selected_world or 'Select world' }}</strong>
+                </div>
+            </div>
+        </header>
+
+        <main class="workspace">
+            <section class="glass-panel viewer-panel" aria-label="Camera viewport panel">
+                <div class="section-header">
+                    <div>
+                        <p class="eyebrow">Live feed</p>
+                        <h2>Simulation camera</h2>
+                    </div>
+                    <span class="pill pill-live">LIVE</span>
+                </div>
+
+                <div class="camera-stage">
+                    <img id="video-feed" src="{{ url_for('video_feed') }}" alt="Simulation feed">
+
+                    <div class="feed-overlay feed-overlay-top-left">
+                        <span>24 FPS</span>
+                        <span>1280×720</span>
+                    </div>
+
+                    <div class="camera-toolbar" aria-label="Camera controls">
+                        <button type="button" class="icon-button" data-camera="left" aria-label="Rotate camera left">
+                            <i class="fa-solid fa-rotate-left"></i>
+                        </button>
+                        <button type="button" class="icon-button" data-camera="right" aria-label="Rotate camera right">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+                        <button type="button" class="icon-button" data-camera="in" aria-label="Zoom in">
+                            <i class="fa-solid fa-magnifying-glass-plus"></i>
+                        </button>
+                        <button type="button" class="icon-button" data-camera="out" aria-label="Zoom out">
+                            <i class="fa-solid fa-magnifying-glass-minus"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="glass-panel control-panel" aria-label="Simulation controls">
+                <div class="section-header">
+                    <div>
+                        <p class="eyebrow">Session</p>
+                        <h2>Mission controls</h2>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <div class="field-row">
+                        <label class="field-label" for="goal-select">Goal</label>
+                        <button type="button" id="btn-new-goal" class="text-button" disabled>
+                            <i class="fa-solid fa-plus"></i>
+                            <span>New Goal</span>
+                        </button>
+                    </div>
+                    <select id="goal-select" class="form-select">
+                        <option value="">{% if goals %}Select a goal...{% else %}No saved goals. Create one!{% endif %}</option>
+                        {% for goal in goals %}
+                        <option value="{{ goal }}">{{ goal }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="panel-section">
+                    <label class="field-label" for="world-select">World</label>
+                    <select id="world-select" class="form-select">
+                        <option value="">Select a world...</option>
+                        {% for world in worlds %}
+                        <option value="{{ world }}" {% if selected_world and world == selected_world %}selected{% endif %}>{{ world }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="panel-section">
+                    <div class="button-grid">
+                        <button type="button" id="btn-start" class="action-button primary">
+                            <i class="fa-solid fa-play"></i>
+                            <span>Start</span>
+                        </button>
+                        <button type="button" id="btn-next" class="action-button neutral">
+                            <i class="fa-solid fa-forward-step"></i>
+                            <span>Next</span>
+                        </button>
+                        <button type="button" id="btn-undo" class="action-button warning">
+                            <i class="fa-solid fa-rotate-left"></i>
+                            <span>Undo</span>
+                        </button>
+                        <button type="button" id="btn-run-all" class="action-button neutral" disabled>
+                            <i class="fa-solid fa-angles-right"></i>
+                            <span>Run All</span>
+                        </button>
+                        <button type="button" id="btn-pause" class="action-button neutral" disabled>
+                            <i class="fa-solid fa-pause"></i>
+                            <span>Pause</span>
+                        </button>
+                        <button type="button" id="btn-resume" class="action-button neutral" disabled>
+                            <i class="fa-solid fa-play"></i>
+                            <span>Resume</span>
+                        </button>
+                        <button type="button" id="btn-stop" class="action-button danger" disabled>
+                            <i class="fa-solid fa-stop"></i>
+                            <span>Stop</span>
+                        </button>
+                        <button type="button" id="btn-reset" class="action-button danger">
+                            <i class="fa-solid fa-rotate-right"></i>
+                            <span>Reset</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel-section speed-section">
+                    <div class="speed-header">
+                        <label class="field-label" for="speed-slider">Simulation speed</label>
+                        <span id="speed-value" class="speed-value">0.5x</span>
+                    </div>
+                    <input id="speed-slider" type="range" min="0.1" max="2" step="0.1" value="0.5" aria-label="Simulation speed slider">
+                </div>
+
+                <div class="panel-section composer-panel">
+                    <div class="composer-header">
+                        <h3>Action composer</h3>
+                        <button type="button" id="btn-record" class="icon-button record-button" aria-label="Start recording" title="Start recording">
+                            <i class="fa-solid fa-record-vinyl"></i>
+                        </button>
+                    </div>
+                    <div id="recording-status" class="recording-status" hidden>Recording...</div>
+
+                    <label class="field-label" for="predicate-select">Predicate</label>
+                    <select id="predicate-select" class="form-select">
+                        <option value="">Select an action...</option>
+                        {% for predicate in list_of_predicates %}
+                        <option value="{{ predicate }}">{{ predicate }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <div id="argument-container" class="argument-container" aria-live="polite"></div>
+
+                    <button type="button" id="btn-execute" class="action-button primary btn-wide">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>Execute Move</span>
+                    </button>
+                </div>
+
+                <div class="panel-section log-panel">
+                    <div class="composer-header">
+                        <h3>Action log</h3>
+                    </div>
+                    <div id="action-log" class="log" aria-live="polite" aria-label="Action log">
+                        <div class="log-entry info"><span class="timestamp">System</span> Ready. Select a goal and begin your session.</div>
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <footer class="footer">
+            <span>ToolNet v2 · Made by iHEB BEKIR</span>
+            <div class="status-inline" aria-live="polite">
+                <span id="footer-status-dot" class="status-dot online"></span>
+                <span id="footer-status-text">Online</span>
+            </div>
+        </footer>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <div id="goal-modal" class="goal-modal" hidden>
+        <div class="goal-modal-backdrop" data-close-goal-modal></div>
+        <section class="goal-dialog glass-panel" role="dialog" aria-modal="true" aria-labelledby="goal-dialog-title">
+            <div class="section-header">
+                <div>
+                    <p class="eyebrow">Save sequence</p>
+                    <h2 id="goal-dialog-title">Create new goal</h2>
+                </div>
+                <button type="button" class="icon-button" data-close-goal-modal aria-label="Close goal dialog">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <label class="field-label" for="goal-name-input">Goal name</label>
+            <input id="goal-name-input" class="form-control" type="text" maxlength="80" placeholder="e.g. Prepare workstation">
+            <label class="field-label" for="recorded-actions-preview">Recorded actions</label>
+            <textarea id="recorded-actions-preview" class="form-control goal-actions-preview" rows="5" readonly></textarea>
+            <div class="goal-dialog-actions">
+                <button type="button" id="btn-cancel-goal" class="action-button neutral">Cancel</button>
+                <button type="button" id="btn-save-goal" class="action-button primary">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>Save Goal</span>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

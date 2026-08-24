@@ -1,0 +1,23 @@
+{% for (a, (i, j)) in arguments_list %}
+<div class="arg-field">
+    <label for="arg{{ a }}">{{ i }}</label>
+
+    {% if j == "dropdown-objects" %}
+        <select id="arg{{ a }}" class="form-control arg-select">
+            {% for object in world_objects %}
+                {% if object not in constraints_dict[i] %}
+                    <option value="{{ object }}">{{ object }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    {% elif j == "dropdown-states" %}
+        <select id="arg{{ a }}" class="form-control">
+            {% for state in dropdown_states %}
+                <option value="{{ state }}">{{ state }}</option>
+            {% endfor %}
+        </select>
+    {% else %}
+        <input type="text" id="arg{{ a }}" class="form-control" placeholder="{{ i }}">
+    {% endif %}
+</div>
+{% endfor %}
